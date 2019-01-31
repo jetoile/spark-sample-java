@@ -1,0 +1,28 @@
+<workflow-app xmlns='uri:oozie:workflow:0.3' name='shell-wf'>
+    <start to='spark' />
+    <action name='spark'>
+
+        <spark xmlns="uri:oozie:spark-action:0.2">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <master>yarn</master>
+            <mode>cluster</mode>
+            <name>sampleSpark</name>
+            <class>fr.jetoile.spark.Main</class>
+            <jar>${nameNode}/user/${userName}/lib/spark-sample-java-1.0-SNAPSHOT.jar</jar>
+            <spark-opts>--num-executors 5 --driver-memory 8g --executor-memory 30g --executor-cores 8</spark-opts>
+            <arg>-i</arg>
+            <arg>${inputPath}</arg>
+            <arg>-o</arg>
+            <arg>${outputPath}</arg>
+        </spark>
+
+
+        <ok to="end" />
+        <error to="fail" />
+    </action>
+    <kill name="fail">
+        <message>Script failed</message>
+    </kill>
+    <end name='end' />
+</workflow-app>

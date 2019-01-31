@@ -1,0 +1,21 @@
+<workflow-app xmlns='uri:oozie:workflow:0.3' name='shell-wf'>
+<start to='shell1' />
+<action name='shell1'>
+    <shell xmlns="uri:oozie:shell-action:0.1">
+        <job-tracker>${jobTracker}</job-tracker>
+        <name-node>${nameNode}</name-node>
+        <exec>/bin/bash</exec>
+        <argument>test.sh</argument>
+        <argument>${inputPath}</argument>
+        <argument>${inputPath}</argument>
+        <file>${nameNode}/user/${userName}/example-spark2/test.sh#test.sh</file>
+        <file>${nameNode}/user/${userName}/lib/spark-sample-java-1.0-SNAPSHOT.jar#spark-sample-java-1.0-SNAPSHOT.jar</file>
+    </shell>
+    <ok to="end" />
+    <error to="fail" />
+</action>
+<kill name="fail">
+    <message>Script failed</message>
+</kill>
+<end name='end' />
+</workflow-app>
