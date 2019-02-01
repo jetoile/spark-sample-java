@@ -7,7 +7,7 @@
         <exec>/bin/bash</exec>
         <argument>test.sh</argument>
         <argument>${inputPath}</argument>
-        <argument>${inputPath}</argument>
+        <argument>${outputPath}</argument>
         <file>${nameNode}/user/${userName}/example-spark2/test.sh#test.sh</file>
         <file>${nameNode}/user/${userName}/lib/spark-sample-java-1.0-SNAPSHOT.jar#spark-sample-java-1.0-SNAPSHOT.jar</file>
     </shell>
